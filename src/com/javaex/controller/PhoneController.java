@@ -72,6 +72,40 @@ public class PhoneController extends HttpServlet {
    			
    			response.sendRedirect("/phonebook2/pbc?action=list");
 
+   		} else if("delete".equals(action)) {
+   			System.out.println("전화번호 삭제");
+   			
+   			//personId 값
+   			int personId = Integer.parseInt(request.getParameter("id"));	
+   		
+   			//new dao 삭제
+   			PhoneDao phoneDao = new PhoneDao();
+   			phoneDao.personDelete(personId);
+   			
+   			response.sendRedirect("/phonebook2/pbc?action=list");
+   		} else if("upform".equals(action)){
+   			System.out.println("수정 폼 처리");
+   			
+   			RequestDispatcher rd = request.getRequestDispatcher("./WEB-INF/upform.jsp");
+   			rd.forward(request, response);
+   			
+   		} else if("update".equals(action)) {
+   			System.out.println("전화번호 수정");
+   			
+   			//파라미터 값
+   			String name = request.getParameter("name");
+   			String hp = request.getParameter("hp");
+   			String company = request.getParameter("company");
+   			int id = Integer.parseInt(request.getParameter("id"));
+   			
+   			//personVo 묶고
+   			PersonVo personVo = new PersonVo(id, name, hp, company);
+   			
+   			//new dao > 수정
+   			PhoneDao phoneDao = new PhoneDao();
+   			phoneDao.personUpdate(personVo);
+   			
+   			response.sendRedirect("/phonebook2/pbc?action=list");
    		}
 		
 	}

@@ -5,6 +5,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.javaex.vo.PersonVo" %>
 
+
 <%
 	List<PersonVo> personList = (List<PersonVo>)request.getAttribute("pList"); //형변환 필수
 	System.out.println("=======List======");
@@ -31,7 +32,9 @@
 	<table border="1">
 		<tr>
 			<td>이름(name)</td>
-			<td><%=personList.get(i).getName() %></td>
+			<td><%=personList.get(i).getName() %>
+				 (<%=personList.get(i).getPersonId() %>)
+			</td>
 		</tr>
 		
 		<tr>
@@ -42,12 +45,16 @@
 		<tr>
 			<td>회사(company)</td>
 			<td><%=personList.get(i).getCompany() %></td>
-		</tr>	
+		</tr>
+		<tr>
+			<td><a href="/phonebook2/pbc?action=upform&id=<%=personList.get(i).getPersonId() %>">[수정]</a></td>
+			<td><a href="/phonebook2/pbc?action=delete&id=<%=personList.get(i).getPersonId() %>">[삭제]</a></td>
+		</tr>
 	</table>
 	<br>
 	<%} %>
 	
-	<a href="">추가번호 등록</a>
+	<a href="/phonebook2/pbc?action=wform">추가번호 등록</a>
 	
 	
 </body>
