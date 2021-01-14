@@ -1,11 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="com.javaex.vo.PersonVo" %>
-
-
-<%
-	PersonVo personVo = (PersonVo)request.getAttribute("pvo");
-
-%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
 <!DOCTYPE html>
@@ -27,7 +21,7 @@
 		이름(name): <input type="text" name="name"> <br>
 		핸드폰(hp): <input type="text" name="hp"> <br>
 		회사(company): <input type="text" name="company"> <br>
-		코드(id) 히든으로 처리: <input type="text" name="id" value="<%=personVo.getPersonId() %>"><br>
+		코드(id) 히든으로 처리: <input type="text" name="id" value="${personVo.personId}"><br>
 		action 히든처리: <input type="text" name="action" value="update"><br> 
 		<button type="submit">수정</button>
 		
