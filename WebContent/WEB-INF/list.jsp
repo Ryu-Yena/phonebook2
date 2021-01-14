@@ -1,17 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<!--PhoneController에서 포워드 시킴 personList-->
-
-<%@ page import="java.util.List" %>
-<%@ page import="com.javaex.vo.PersonVo" %>
-
-
-<%
-	List<PersonVo> personList = (List<PersonVo>)request.getAttribute("pList"); //형변환 필수
-	System.out.println("=======List======");
-	System.out.println(personList);
-
-%>
 
 
 <!DOCTYPE html>
@@ -28,31 +17,30 @@
 		입력한 정보 내역입니다.
 	</p>
 	
-	<% for(int i=0; i<personList.size();i++){ %>
-	<table border="1">
-		<tr>
-			<td>이름(name)</td>
-			<td><%=personList.get(i).getName() %>
-				 (<%=personList.get(i).getPersonId() %>)
-			</td>
-		</tr>
-		
-		<tr>
-			<td>핸드폰(hp)</td>
-			<td><%=personList.get(i).getHp() %></td>
-		</tr>
-		
-		<tr>
-			<td>회사(company)</td>
-			<td><%=personList.get(i).getCompany() %></td>
-		</tr>
-		<tr>
-			<td><a href="/phonebook2/pbc?action=upform&id=<%=personList.get(i).getPersonId() %>">[수정]</a></td>
-			<td><a href="/phonebook2/pbc?action=delete&id=<%=personList.get(i).getPersonId() %>">[삭제]</a></td>
-		</tr>
-	</table>
-	<br>
-	<%} %>
+	<c:forEach items="${requestScope.personList}" var="personVo">
+		<table border="1">
+			<tr>
+				<td>이름(name)</td>
+				<td>${personList.name} (${personList.psersonId})
+				</td>
+			</tr>
+			
+			<tr>
+				<td>핸드폰(hp)</td>
+				<td>${personList.hp}</td>
+			</tr>
+			
+			<tr>
+				<td>회사(company)</td>
+				<td>${personList.company}</td>
+			</tr>
+			<tr>
+				<td><a href="/phonebook2/pbc?action=upform&id=${personList.personId}">[수정]</a></td>
+				<td><a href="/phonebook2/pbc?action=delete&id=${personList.personId}">[삭제]</a></td>
+			</tr>
+		</table>
+		<br>
+	</c:forEach>
 	
 	<a href="/phonebook2/pbc?action=wform">추가번호 등록</a>
 	
