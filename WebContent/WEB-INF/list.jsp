@@ -17,7 +17,7 @@
 		입력한 정보 내역입니다.
 	</p>
 	
-	<c:forEach items="${requestScope.personList}" var="personVo">
+	<c:forEach items="${requestScope.personList}" var="personList">
 		<table border="1">
 			<tr>
 				<td>이름(name)</td>
